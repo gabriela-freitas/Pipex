@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/gafreita/Desktop/Pipex'
+make -C LIBFT/libft/
+ 
+make: Leaving directory `/Users/gafreita/Desktop/Pipex'
+ 

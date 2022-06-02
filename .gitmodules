@@ -1,0 +1,3 @@
+[submodule "LIBFT"]
+	path = LIBFT
+	url = git@github.com:gabriela-freitas/LIBFT.git
