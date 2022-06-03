@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 21:42:28 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/02 22:02:36 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/03 21:29:57 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ $(NAME): $(OBJS) | libft
 	@$(CC) $(^) -L$(LIB_DIR) -lft -o $(@)
 	@echo "$(COLOUR_GREEN) >>> PIPEX OK <<< $(COLOUR_END)"
 
+submodule:
+	@git submodule update --init --recursive
+
 all: $(NAME)
 
 %.o: %.c
@@ -50,4 +53,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft submodule
