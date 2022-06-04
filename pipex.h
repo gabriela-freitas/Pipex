@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:47:17 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/04 13:54:27 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/04 14:20:23 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ typedef struct s_info
 	char	*infile;
 	char	*outfile;
 }	t_info;
+
+char	**find_path(char **envp);
+int		find_right_path(char **cmd);
+t_info	*infos(void);
 
 #endif
