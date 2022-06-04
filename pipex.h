@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:47:17 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/03 21:40:44 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/04 13:54:27 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdint.h>
-# include <limits.h>
+# include <stdio.h>
 # include "libft.h"
+# include <fcntl.h>
 
 typedef struct s_info
 {

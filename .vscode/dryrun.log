@@ -1,5 +1,9 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/gafreita/Desktop/Pipex'
+gcc -Wall -Wextra -Werror -fsanitize=address -g -ILIBFT/libft/ -c pipex.c -o pipex.o
 make -C LIBFT/libft/
+gcc -Wall -Wextra -Werror -fsanitize=address pipex.o -LLIBFT/libft/ -lft -o pipex
+echo "\033[7;1;32m >>> PIPEX OK <<< \033[0m"
+ 
 make: Leaving directory `/Users/gafreita/Desktop/Pipex'
  

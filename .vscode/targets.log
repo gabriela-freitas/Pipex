@@ -8,11 +8,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Fri Jun  3 21:30:27 2022
+# Make data base, printed on Sat Jun  4 12:47:00 2022
 
 # Variables
 
- 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -46,7 +45,7 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 17)
 OBJS = $(SRCS:%.c=%.o)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0001_38000_ht/T/vscode-ipc-bd0c442c-2dab-46e5-b94b-3c5d0ccde104.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0001_38000_ht/T/vscode-ipc-5bb2613b-c8bf-4106-8230-7a1411789154.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -60,7 +59,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.TgeODVFNBD/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.XYiDYW9gSt/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -80,7 +79,7 @@ VSCODE_CODE_CACHE_PATH = /Users/gafreita/Library/Application Support/Code/Cached
 # environment
 LOGNAME = gafreita
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 ZSH = /Users/gafreita/.oh-my-zsh
 # environment
@@ -128,7 +127,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2352
+XPC_SERVICE_NAME = com.microsoft.VSCode.4256
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from `Makefile', line 25)
@@ -156,9 +155,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1575
+VSCODE_PID = 95270
 # variable set hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=3/103=3%
+# Load=72/1024=7%, Rehash=0, Collisions=3/104=3%
 
 # Pattern-specific Variable Values
 
@@ -189,7 +188,7 @@ all: pipex
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
 
 .PHONY: all clean fclean re libft submodule
 #  Implicit rule search has not been done.
@@ -199,28 +198,8 @@ all: pipex
 libft:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := libft
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/11=18%
+#  File has not been updated.
 #  commands to execute (from `Makefile', line 44):
 	@make -C $(LIB_DIR)
 	
@@ -243,7 +222,7 @@ Makefile:
 # Not a target:
 pipex.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-03 21:25:10
+#  Last modified 2022-06-03 21:54:26
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -293,29 +272,45 @@ clean:
 pipex.o: pipex.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `pipex'
-#  Last modified 2022-06-03 21:30:07
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := pipex.o
+# automatic
+# % := 
+# automatic
+# * := pipex
+# automatic
+# + := pipex.c
+# automatic
+# | := 
+# automatic
+# < := pipex.c
+# automatic
+# ^ := pipex.c
+# automatic
+# ? := pipex.c
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
 #  commands to execute (from `Makefile', line 41):
 	@$(CC) -g $(INCLUDES) -c $(^) -o $(@)
 	
 
 pipex: pipex.o | libft
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-03 21:30:09
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
 #  commands to execute (from `Makefile', line 32):
 	@$(CC) $(^) -L$(LIB_DIR) -lft -o $(@)
 	@echo "$(COLOUR_GREEN) >>> PIPEX OK <<< $(COLOUR_END)"
 	
 
 # files hash-table stats:
-# Load=13/1024=1%, Rehash=0, Collisions=0/42=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/41=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -327,6 +322,6 @@ pipex: pipex.o | libft
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jun  3 21:30:27 2022
+# Finished Make data base on Sat Jun  4 12:47:00 2022
 
  
