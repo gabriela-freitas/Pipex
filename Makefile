@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 21:42:28 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/05 18:07:49 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/06 19:46:52 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS =	pipex.c \
 
 OBJS = $(SRCS:%.c=%.o)
 
-CC = gcc -Wall -Wextra -Werror -fsanitize=address
+CC = gcc -Wall -Wextra -Werror
 
 INCLUDES = -ILIBFT/libft/
 
@@ -38,6 +38,9 @@ submodule:
 	@git submodule update --init --recursive
 
 all: $(NAME)
+
+valgrind: re
+	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex in "ls -l" "grep w" out
 
 %.o: %.c
 	@$(CC) -g $(INCLUDES) -c $(^) -o $(@)
