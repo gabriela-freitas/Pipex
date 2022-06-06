@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/06 20:27:56 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:44:05 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		parse_argv(argv, envp);
 		if (pipe(infos()->pipe_fd) == -1)
-			perror_and_exit("Pipe didn't work\n");
+			perror_and_exit("Pipe didn't work");
 		pid[0] = fork();
 		if (pid[0] == -1)
-			perror_and_exit("Could not fork\n");
+			perror_and_exit("Could not fork");
 		if (!pid[0])
 			child_write_process(infos()->fd_in);
 		else
@@ -45,7 +45,7 @@ static int	parent_process(void)
 
 	pid = fork();
 	if (pid == -1)
-		perror_and_exit("Could not fork\n");
+		perror_and_exit("Could not fork");
 	if (!pid)
 		child_process2();
 	else

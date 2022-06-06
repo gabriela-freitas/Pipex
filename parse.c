@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/06 20:13:25 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:44:21 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	parse_argv(char **argv, char **envp)
 	infos()->paths = get_path(envp);
 	(infos())->fd_in = open(argv[1], O_RDONLY | O_ASYNC);
 	if ((infos())->fd_in < 0)
-		perror("cannot open input file\n");
+		perror_and_exit("cannot open input file");
 	(infos())->cmd1 = ft_split(argv[2], ' ');
 	(infos())->cmd2 = ft_split(argv[3], ' ');
 	(infos())->fd_out = open(argv[4], O_WRONLY | O_ASYNC
 			| O_TRUNC | O_CREAT, S_IRWXU);
 	if ((infos())->fd_out < 0)
-		perror("cannot open file\n");
+		perror_and_exit("cannot open file");
 	get_command_path(&(infos()->cmd2[0]));
 	get_command_path(&(infos()->cmd1[0]));
 }

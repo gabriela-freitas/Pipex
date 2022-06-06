@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 21:42:28 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/06 19:46:52 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/06 21:42:03 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ submodule:
 all: $(NAME)
 
 valgrind: re
-	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex in "ls -l" "grep w" out
+	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex non "ls -l" "grep w" out
 
 %.o: %.c
 	@$(CC) -g $(INCLUDES) -c $(^) -o $(@)
