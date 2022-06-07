@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/gafreita/Desktop/Pipex'
 gcc -Wall -Wextra -Werror -g -ILIBFT/libft/ -c pipex.c -o pipex.o
+ 
 gcc -Wall -Wextra -Werror -g -ILIBFT/libft/ -c parse.c -o parse.o
 gcc -Wall -Wextra -Werror -g -ILIBFT/libft/ -c exec.c -o exec.o
 make -C LIBFT/libft/

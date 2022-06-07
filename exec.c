@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:04:05 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/06 21:45:02 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/07 16:01:24 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	child_write_process(int fd)
 {
-	if (dup2(fd, 0) == -1)
+	if (dup2(fd, STDIN_FILENO) == -1)
 		perror_and_exit("Could not dup");
 	close(infos()->pipe_fd[0]);
 	if (dup2(infos()->pipe_fd[1], 1) == -1)
@@ -33,7 +33,7 @@ void	child_process2(void)
 	if (dup2(infos()->pipe_fd[0], 0) == -1)
 		perror_and_exit("Could not dup");
 	close(infos()->pipe_fd[0]);
-	if (dup2(fd, 1) < 0)
+	if (dup2(fd, STDOUT_FILENO) < 0)
 		perror_and_exit("Could not dup");
 	execve(infos()->cmd2[0], infos()->cmd2, NULL);
 	perror_and_exit("exec did not work");
