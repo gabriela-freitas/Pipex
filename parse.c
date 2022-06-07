@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/06 21:44:21 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:37:20 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,35 @@
 
 t_info		*infos(void);
 static char	**get_path(char **envp);
-static int	get_command_path(char **cmd);
+static void	get_command_path(char **cmd);
+static void	parse_commands(int argc, char **argv);
 
 /*parse agrs*/
-void	parse_argv(char **argv, char **envp)
+void	parse_argv(int argc, char **argv, char **envp)
 {
 	infos()->paths = get_path(envp);
 	(infos())->fd_in = open(argv[1], O_RDONLY | O_ASYNC);
 	if ((infos())->fd_in < 0)
 		perror_and_exit("cannot open input file");
-	(infos())->cmd1 = ft_split(argv[2], ' ');
-	(infos())->cmd2 = ft_split(argv[3], ' ');
-	(infos())->fd_out = open(argv[4], O_WRONLY | O_ASYNC
+	(infos())->fd_out = open(argv[argc - 1], O_WRONLY | O_ASYNC
 			| O_TRUNC | O_CREAT, S_IRWXU);
 	if ((infos())->fd_out < 0)
-		perror_and_exit("cannot open file");
-	get_command_path(&(infos()->cmd2[0]));
-	get_command_path(&(infos()->cmd1[0]));
+		perror_and_exit("cannot create output file");
+	parse_commands(argc, argv);
+}
+
+/*parse every command and find path*/
+static void	parse_commands(int argc, char **argv)
+{
+	int	i;
+
+	(infos())->cmds = malloc(sizeof(char *) * (argc - 3));
+	i = 1;
+	while (++i < argc - 1)
+	{
+		(infos()->cmds)[i - 2] = ft_split(argv[i], ' ');
+		get_command_path((infos()->cmds)[i]);
+	}
 }
 
 /*returns the struct with infos*/
@@ -55,7 +67,7 @@ static char	**get_path(char **envp)
 }
 
 /*find in which path is every command*/
-static int	get_command_path(char **cmd)
+static void	get_command_path(char **cmd)
 {
 	char	*path;
 	int		i;
@@ -71,11 +83,13 @@ static int	get_command_path(char **cmd)
 			free(*cmd);
 			*cmd = path;
 			free(aux);
-			return (1);
+			return ;
 		}
 		free(path);
 		i ++;
 	}
 	free(aux);
-	return (0);
+	if (access(path, F_OK) == -1)
+		perror_and_exit("Not a valid command or path");
+	return ;
 }
