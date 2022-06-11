@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/07 19:37:20 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:18:18 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	parse_argv(int argc, char **argv, char **envp)
 			| O_TRUNC | O_CREAT, S_IRWXU);
 	if ((infos())->fd_out < 0)
 		perror_and_exit("cannot create output file");
+	infos()->num_cmds = argc - 3;
 	parse_commands(argc, argv);
 }
 
@@ -36,13 +37,15 @@ static void	parse_commands(int argc, char **argv)
 {
 	int	i;
 
-	(infos())->cmds = malloc(sizeof(char *) * (argc - 3));
-	i = 1;
-	while (++i < argc - 1)
+	(infos())->cmds = malloc(sizeof(char *) * (argc - 2));
+	i = 0;
+	while ((i + 2) < argc - 1)
 	{
-		(infos()->cmds)[i - 2] = ft_split(argv[i], ' ');
+		(infos()->cmds)[i] = ft_split(argv[i + 2], ' ');
 		get_command_path((infos()->cmds)[i]);
+		i ++;
 	}
+	infos()->cmds[i] = NULL;
 }
 
 /*returns the struct with infos*/

@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:47:17 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/07 19:55:54 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:17:14 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ typedef struct s_info
 	char	**paths;
 	char	***cmds;
 	int		pipe_fd[2];
-	int		aux[2];
+	int		pipe_aux[2];
 	int		fd_out;
 	int		fd_in;
+	int		num_cmds;
 }	t_info;
 
 t_info		*infos(void);
 void		parse_argv(int argc, char **argv, char **envp);
-void		child_write_process(int fd);
-void		child_process2(void);
+void		child_write_process(int fd_infile, char **command);
+void		child_read_process(int fd_outfile, char **command);
 void		perror_and_exit(char *error);
 
 #endif
