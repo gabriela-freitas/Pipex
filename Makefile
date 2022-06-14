@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
+#    By: gafreita <gafreita@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 21:42:28 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/11 21:13:36 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/14 14:39:09 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJS) | libft
 submodule:
 	@git submodule update --init --recursive
 
-all: $(NAME)
+all: $(NAME) submodule
 
 valgrind: re
 	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex non "ls -l" "grep w" out
