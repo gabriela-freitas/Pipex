@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 19:39:05 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 19:47:40 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,18 @@ static void	free_pipex(void)
 	int	i;
 
 	free_split(infos()->paths);
-	i = 0;
-	while (i < infos()->num_cmds)
+	if (infos()->cmds)
 	{
+		i = 0;
+		while (i < infos()->num_cmds)
+		{
+			free_split(infos()->cmds[i]);
+			i ++;
+		}
 		free_split(infos()->cmds[i]);
-		i ++;
 	}
-	free_split(infos()->cmds[i]);
-	close(infos()->fd_in);
-	close(infos()->fd_out);
+	if (infos()->fd_in)
+		close(infos()->fd_in);
+	if (infos()->fd_out)
+		close(infos()->fd_out);
 }

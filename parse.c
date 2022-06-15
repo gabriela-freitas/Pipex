@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/11 21:18:18 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 19:45:24 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	parse_commands(int argc, char **argv);
 /*parse agrs*/
 void	parse_argv(int argc, char **argv, char **envp)
 {
+	infos()->cmds = NULL;
 	infos()->paths = get_path(envp);
 	(infos())->fd_in = open(argv[1], O_RDONLY | O_ASYNC);
 	if ((infos())->fd_in < 0)
