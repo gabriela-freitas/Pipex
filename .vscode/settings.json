@@ -1,3 +1,11 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode"
+	"makefile.extensionOutputFolder": "./.vscode",
+	"files.associations": {
+		"pipex.h": "c",
+		"__config": "cpp",
+		"__functional_03": "cpp",
+		"functional": "cpp",
+		"locale": "cpp"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

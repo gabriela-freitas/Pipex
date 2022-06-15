@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/13 20:52:28 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:40:32 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	main(int argc, char **argv, char **envp)
 		i = 0;
 		while (1)
 		{
-			// if (pipe(infos()->pipe_fd) == -1)
-			// 	perror_and_exit("Pipe didn't work");
+			if (pipe(infos()->pipe_fd) == -1)
+				perror_and_exit("Pipe didn't work");
 			pid = fork();
 			if (pid == -1)
 				perror_and_exit("Could not fork");
 			if (!pid)
 			{
-				ft_printf("i = %d\npipe fd[0] = %d\n", i, infos()->pipe_fd[1]);
+				ft_printf("i = %d(child)\n", i);
 				if (i == 0)
 					child_write_process(infos()->fd_in, infos()->cmds[i]);
 				else
@@ -43,11 +43,13 @@ int	main(int argc, char **argv, char **envp)
 			}
 			else
 			{
+				close(infos()->pipe_fd[1]);
 				wait(NULL);
 				i++;
 				ft_printf("i = %d(parent)\n", i);
 				parent_process(i);
 			}
+			i++;
 		}
 	}
 	else
@@ -59,8 +61,8 @@ static void	parent_process(int i)
 {
 	pid_t	pid;
 
-	// if (pipe(infos()->pipe_aux) == -1)
-	// 	perror_and_exit("Pipe aux didn't work");
+	if (pipe(infos()->pipe_aux) == -1)
+		perror_and_exit("Pipe aux didn't work");
 	pid = fork();
 	if (pid == -1)
 		perror_and_exit("Could not fork");
@@ -73,7 +75,8 @@ static void	parent_process(int i)
 	}
 	else
 	{
-		wait(&pid);
+		close(infos()->pipe_fd[0]);
+		wait(NULL);
 		if (i == infos()->num_cmds - 1)
 		{
 			free_pipex();
