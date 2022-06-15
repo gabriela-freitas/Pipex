@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 16:40:32 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 19:39:05 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,44 @@
 
 static void	free_pipex(void);
 static void	parent_process(int i);
+static void	pipex(void);
 
 int	main(int argc, char **argv, char **envp)
 {
-	pid_t	pid;
-	int		i;
-
 	if (argc > 4)
 	{
-		(infos())->fd_fake = open("pseudo_pipe", O_RDWR | O_ASYNC | O_TRUNC);
 		parse_argv(argc, argv, envp);
-		ft_printf("n de cmds: %d\n", infos()->num_cmds);
-		i = 0;
-		while (1)
-		{
-			if (pipe(infos()->pipe_fd) == -1)
-				perror_and_exit("Pipe didn't work");
-			pid = fork();
-			if (pid == -1)
-				perror_and_exit("Could not fork");
-			if (!pid)
-			{
-				ft_printf("i = %d(child)\n", i);
-				if (i == 0)
-					child_write_process(infos()->fd_in, infos()->cmds[i]);
-				else
-					child_write_process(-1, infos()->cmds[i]);
-			}
-			else
-			{
-				close(infos()->pipe_fd[1]);
-				wait(NULL);
-				i++;
-				ft_printf("i = %d(parent)\n", i);
-				parent_process(i);
-			}
-			i++;
-		}
+		pipex();
 	}
 	else
 		perror_and_exit("Less than 5 args");
 	return (0);
+}
+
+static void	pipex(void)
+{
+	pid_t	pid;
+	int		i;
+
+	i = -1;
+	while (++i < infos()->num_cmds)
+	{
+		if (pipe(infos()->pipe_fd) == -1)
+			perror_and_exit("Pipe didn't work");
+		pid = fork();
+		if (pid == -1)
+			perror_and_exit("Could not fork");
+		if (!pid)
+			first_child_process(i);
+		else
+		{
+			close(infos()->pipe_fd[1]);
+			close(infos()->pipe_aux[0]);
+			wait(NULL);
+			i++;
+			parent_process(i);
+		}
+	}
 }
 
 static void	parent_process(int i)
@@ -67,15 +64,11 @@ static void	parent_process(int i)
 	if (pid == -1)
 		perror_and_exit("Could not fork");
 	if (!pid)
-	{
-		if (i == infos()->num_cmds - 1)
-			child_read_process(infos()->fd_out, infos()->cmds[i]);
-		else
-			child_read_process(-1, infos()->cmds[i]);
-	}
+		second_child_process(i);
 	else
 	{
 		close(infos()->pipe_fd[0]);
+		close(infos()->pipe_aux[1]);
 		wait(NULL);
 		if (i == infos()->num_cmds - 1)
 		{
@@ -104,6 +97,7 @@ static void	free_pipex(void)
 		free_split(infos()->cmds[i]);
 		i ++;
 	}
+	free_split(infos()->cmds[i]);
 	close(infos()->fd_in);
 	close(infos()->fd_out);
 }
