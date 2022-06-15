@@ -6,16 +6,17 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 14:15:30 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/15 19:49:21 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/15 20:11:56 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = pipex
 
-SRCS =	pipex.c \
-		parse.c \
-		exec.c
+SRCS =	parse.c \
+		main.c \
+		pipex.c \
+		child_process.c \
 
 OBJS = $(SRCS:%.c=%.o)
 

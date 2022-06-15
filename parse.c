@@ -6,16 +6,25 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 19:45:24 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 20:14:47 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 t_info		*infos(void);
+void		parse_argv(int argc, char **argv, char **envp);
 static char	**get_path(char **envp);
 static void	get_command_path(char **cmd);
 static void	parse_commands(int argc, char **argv);
+
+/*returns the struct with infos*/
+t_info	*infos(void)
+{
+	static t_info	info;
+
+	return (&info);
+}
 
 /*parse agrs*/
 void	parse_argv(int argc, char **argv, char **envp)
@@ -24,11 +33,11 @@ void	parse_argv(int argc, char **argv, char **envp)
 	infos()->paths = get_path(envp);
 	(infos())->fd_in = open(argv[1], O_RDONLY | O_ASYNC);
 	if ((infos())->fd_in < 0)
-		perror_and_exit("cannot open input file");
+		exit_message("cannot open input file");
 	(infos())->fd_out = open(argv[argc - 1], O_WRONLY | O_ASYNC
 			| O_TRUNC | O_CREAT, S_IRWXU);
 	if ((infos())->fd_out < 0)
-		perror_and_exit("cannot create output file");
+		exit_message("cannot create output file");
 	infos()->num_cmds = argc - 3;
 	parse_commands(argc, argv);
 }
@@ -47,14 +56,6 @@ static void	parse_commands(int argc, char **argv)
 		i ++;
 	}
 	infos()->cmds[i] = NULL;
-}
-
-/*returns the struct with infos*/
-t_info	*infos(void)
-{
-	static t_info	info;
-
-	return (&info);
 }
 
 /*get env variable PATH and split it*/
@@ -94,6 +95,6 @@ static void	get_command_path(char **cmd)
 	}
 	free(aux);
 	if (access(path, F_OK) == -1)
-		perror_and_exit("Not a valid command or path");
+		exit_message("Not a valid command or path");
 	return ;
 }

@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:04:05 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 19:32:58 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 20:14:47 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void	exec_command(int read, int write, char **command);
+void		first_child_process(int i);
+void		second_child_process(int i);
 
 static void	print_command(char **command)
 {
@@ -25,25 +29,20 @@ static void	print_command(char **command)
 
 // pipe[0] >> read
 // pipe[1] >> write
-
-/* write process ::: will allways read either from pipe_aux[0] or from infile
-	and write on pipe_fd[1]*/
-
-/*read process ::: will allways read pipe_fd[0]
-	and write on pipe_aux[1] or outfile*/
-
 /*execute command with execve*/
 static void	exec_command(int read, int write, char **command)
 {
 	print_command(command);
 	if (dup2(read, STDIN_FILENO) == -1)
-		perror_and_exit("could not dup read fd");
+		exit_message("could not dup read fd");
 	if (dup2(write, STDOUT_FILENO) == -1)
-		perror_and_exit("could not dup output fd");
+		exit_message("could not dup output fd");
 	execve(command[0], command, NULL);
-	perror_and_exit("exec did not work");
+	exit_message("exec did not work");
 }
 
+/* write process ::: will allways read either from pipe_aux[0] or from infile
+	and write on pipe_fd[1]*/
 void	first_child_process(int i)
 {
 	if (i == 0)
@@ -55,6 +54,8 @@ void	first_child_process(int i)
 			infos()->pipe_fd[1], infos()->cmds[i]);
 }
 
+/*read process ::: will allways read pipe_fd[0]
+	and write on pipe_aux[1] or outfile*/
 void	second_child_process(int i)
 {
 	if (i == infos()->num_cmds - 1)
