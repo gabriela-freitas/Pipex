@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/11 21:22:50 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:52:28 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 4)
 	{
+		(infos())->fd_fake = open("pseudo_pipe", O_RDWR | O_ASYNC | O_TRUNC);
 		parse_argv(argc, argv, envp);
+		ft_printf("n de cmds: %d\n", infos()->num_cmds);
 		i = 0;
 		while (1)
 		{
-			if (pipe(infos()->pipe_fd) == -1)
-				perror_and_exit("Pipe didn't work");
+			// if (pipe(infos()->pipe_fd) == -1)
+			// 	perror_and_exit("Pipe didn't work");
 			pid = fork();
 			if (pid == -1)
 				perror_and_exit("Could not fork");
 			if (!pid)
 			{
-				write(1, "Hey\n", 4);
-				ft_printf("i = %d\n", i);
+				ft_printf("i = %d\npipe fd[0] = %d\n", i, infos()->pipe_fd[1]);
 				if (i == 0)
 					child_write_process(infos()->fd_in, infos()->cmds[i]);
 				else
@@ -42,8 +43,9 @@ int	main(int argc, char **argv, char **envp)
 			}
 			else
 			{
+				wait(NULL);
 				i++;
-				wait(&pid);
+				ft_printf("i = %d(parent)\n", i);
 				parent_process(i);
 			}
 		}
@@ -57,8 +59,8 @@ static void	parent_process(int i)
 {
 	pid_t	pid;
 
-	if (pipe(infos()->pipe_aux) == -1)
-		perror_and_exit("Pipe aux didn't work");
+	// if (pipe(infos()->pipe_aux) == -1)
+	// 	perror_and_exit("Pipe aux didn't work");
 	pid = fork();
 	if (pid == -1)
 		perror_and_exit("Could not fork");

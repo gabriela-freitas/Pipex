@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 21:42:28 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/11 21:13:36 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/13 17:32:29 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS =	pipex.c \
 
 OBJS = $(SRCS:%.c=%.o)
 
-CC = gcc -Wall -Wextra -Werror
+CC = gcc -Wall -Wextra -Werror -g
 
 INCLUDES = -ILIBFT/libft/
 

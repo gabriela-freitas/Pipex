@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:47:17 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/11 21:17:14 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:47:49 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_info
 	int		fd_out;
 	int		fd_in;
 	int		num_cmds;
+	int		fd_fake;
 }	t_info;
 
 t_info		*infos(void);
