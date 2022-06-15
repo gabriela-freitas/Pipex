@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/02 21:42:28 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/13 17:32:29 by gafreita         ###   ########.fr        #
+#    Created: 2022/06/15 14:15:30 by gafreita          #+#    #+#              #
+#    Updated: 2022/06/15 14:15:35 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = pipex
 
@@ -37,7 +38,7 @@ $(NAME): $(OBJS) | libft
 submodule:
 	@git submodule update --init --recursive
 
-all: $(NAME)
+all: $(NAME) submodule
 
 valgrind: re
 	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex non "ls -l" "grep w" out

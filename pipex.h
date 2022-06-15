@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:47:17 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/13 20:47:49 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:15:25 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdio.h>
 # include "libft.h"
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_info
 {
