@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 14:15:30 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/18 18:16:05 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/18 18:39:36 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =	parse.c \
 		main.c \
 		pipex.c \
 		child_process.c \
+		heredoc.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -57,6 +58,7 @@ clean:
 fclean: clean
 	@make fclean -C $(LIB_DIR)
 	@rm -f $(NAME)
+	@rm -f out *.txt
 
 re: fclean all
 

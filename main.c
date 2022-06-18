@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 20:14:47 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:21:45 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ int	main(int argc, char **argv, char **envp)
 {
 	if (argc > 4)
 	{
-		parse_argv(argc, argv, envp);
-		pipex();
+		if (!ft_strncmp(argv[1], "here_doc", 9))
+			here_doc(argc, argv, envp);
+		else
+		{
+			parse_argv(argc, argv, envp);
+			infos()->envp = envp;
+			pipex();
+		}
 	}
 	else
 		exit_message("Less than 5 args");
@@ -47,7 +53,7 @@ void	free_pipex(void)
 			free_split(infos()->cmds[i]);
 			i ++;
 		}
-		free_split(infos()->cmds[i]);
+		//free_split(infos()->cmds[i]);
 	}
 	if (infos()->fd_in)
 		close(infos()->fd_in);

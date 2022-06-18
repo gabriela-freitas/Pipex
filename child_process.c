@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:04:05 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 20:14:47 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:29:02 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	exec_command(int read, int write, char **command)
 		exit_message("could not dup read fd");
 	if (dup2(write, STDOUT_FILENO) == -1)
 		exit_message("could not dup output fd");
-	execve(command[0], command, NULL);
+	execve(command[0], command, infos()->envp);
 	exit_message("exec did not work");
 }
 

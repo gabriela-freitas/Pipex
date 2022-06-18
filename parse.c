@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/18 17:48:20 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:19:56 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_info		*infos(void);
 void		parse_argv(int argc, char **argv, char **envp);
-static char	**get_path(char **envp);
-static void	get_command_path(char **cmd);
-static void	parse_commands(int argc, char **argv);
+char		**get_path(char **envp);
+void		get_command_path(char **cmd);
+void		parse_commands(int argc, char **argv);
 
 /*returns the struct with infos*/
 t_info	*infos(void)
@@ -43,7 +43,7 @@ void	parse_argv(int argc, char **argv, char **envp)
 }
 
 /*parse every command and find path*/
-static void	parse_commands(int argc, char **argv)
+void	parse_commands(int argc, char **argv)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ static void	parse_commands(int argc, char **argv)
 }
 
 /*get env variable PATH and split it*/
-static char	**get_path(char **envp)
+char	**get_path(char **envp)
 {
 	char	**path;
 	char	*aux;
@@ -76,7 +76,7 @@ static char	**get_path(char **envp)
 }
 
 /*find in which path is every command*/
-static void	get_command_path(char **cmd)
+void	get_command_path(char **cmd)
 {
 	char	*path;
 	int		i;
