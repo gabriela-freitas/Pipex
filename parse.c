@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 20:14:47 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:48:20 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ static void	parse_commands(int argc, char **argv)
 	int	i;
 
 	(infos())->cmds = malloc(sizeof(char *) * (argc - 2));
+	if (!infos()->cmds)
+		exit_message("Malloc error");
 	i = 0;
 	while ((i + 2) < argc - 1)
 	{
 		(infos()->cmds)[i] = ft_split(argv[i + 2], ' ');
+		if (!(infos()->cmds)[i])
+			exit_message("Malloc error");
 		get_command_path((infos()->cmds)[i]);
 		i ++;
 	}

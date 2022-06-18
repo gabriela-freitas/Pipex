@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 19:55:55 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/15 20:14:47 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:29:33 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	pipex(void)
 	}
 }
 
+/*execute first fork's parent process*/
 static void	parent_process(int i)
 {
 	pid_t	pid;
