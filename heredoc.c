@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:35:59 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/18 21:57:02 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/19 17:50:34 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,30 @@ void	parse_here_doc(int argc, char **argv, char **envp);
 
 void	here_doc(int argc, char **argv, char **envp)
 {
-	char	*c;
+	char	*line;
+	int		fd;
 
+	//line = malloc(sizeof(char) * BUFFER_SIZE);
 	parse_here_doc(argc, argv, envp);
+	fd = open("infile", O_RDONLY);
 	while (1)
 	{
-		read(0, &c, 1);
-		c = get_next_line(1);
-		write(1, "hey\n", 4);
-		if (!ft_strncmp(c, argv[2], ft_strlen(c) + 1))
+		line = get_next_line(fd);
+		write(2, "hey!\n", 5);
+		if (!line)
 			break ;
-		write(infos()->fd_in, &c, 1);
+		// ft_printf(">> %s\n", line);
+		free(line);
 	}
+	close(fd);
+	// while (1)
+	// {
+	// 	line = get_next_line(fd);
+	// 	if (!ft_strncmp(line, argv[2], ft_strlen(line) + 1))
+	// 		break ;
+	// 	ft_printf("line >> %s\n", line);
+	// 	write(infos()->fd_in, line, ft_strlen(line));
+	// }
 	//unlink(TEMP_FILE);
 }
 
