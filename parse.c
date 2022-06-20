@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/18 20:19:56 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/20 22:04:10 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_info	*infos(void)
 /*parse agrs*/
 void	parse_argv(int argc, char **argv, char **envp)
 {
+	infos()->envp = envp;
 	infos()->cmds = NULL;
 	infos()->paths = get_path(envp);
 	(infos())->fd_in = open(argv[1], O_RDONLY | O_ASYNC);
