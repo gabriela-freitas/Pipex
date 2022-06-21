@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 14:15:30 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/21 21:21:51 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/21 22:09:02 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS =	parse.c \
 
 OBJS = $(SRCS:%.c=%.o)
 
-CC = gcc -Wall -Wextra -Werror
+CC = gcc -Wall -Wextra -Werror -g
 
 INCLUDES = -ILIBFT/libft/
 
@@ -29,7 +29,7 @@ LIB_DIR = LIBFT/libft/
 
 COLOUR_GREEN=\033[7;1;32m
 COLOUR_END=\033[0m
-COLOUR_YELLOW=\033[0;33m
+COLOUR_YELLOW=\033[7;1;33m
 
 # ^ primeira dependencia
 # @ nome da regra
@@ -44,7 +44,12 @@ submodule:
 all: $(NAME) submodule
 
 valgrind: re
-	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex infile "grep a" "grep b" "wc -l" out
+	@echo "$(COLOUR_YELLOW) TEST 1 $(COLOUR_END)"
+	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex infile "grep a" "wc" out
+	@echo "$(COLOUR_YELLOW) TEST 2 $(COLOUR_END)"
+	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex infile "grep a" "grep b" "wc" out
+	@echo "$(COLOUR_YELLOW) TEST 3 $(COLOUR_END)"
+	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex here_doc EOF "grep a" "grep b" "grep c" "wc" out
 
 %.o: %.c
 	@$(CC) $(INCLUDES) -c $(^) -o $(@)
@@ -63,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft submodule
+.PHONY: all clean fclean re libft subm00odule valgrind

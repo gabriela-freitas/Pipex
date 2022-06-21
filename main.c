@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/21 21:02:20 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:07:35 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char **argv, char **envp)
 		else
 			parse_argv(argc, argv, envp);
 		pipex();
+		free_pipex();
+		return (0);
 	}
 	else
 		exit_message("Less than 5 args");
