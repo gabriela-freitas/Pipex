@@ -6,13 +6,13 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 19:55:55 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/21 20:41:32 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/21 21:23:04 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	parent_process(int i);
+static int	parent_process(int i);
 
 void	pipex(void)
 {
@@ -35,7 +35,8 @@ void	pipex(void)
 			close(infos()->pipe_aux[0]);
 			wait(NULL);
 			i++;
-			parent_process(i);
+			if (parent_process(i))
+				break ;
 		}
 	}
 	free_pipex();
@@ -43,7 +44,7 @@ void	pipex(void)
 }
 
 /*execute first fork's parent process*/
-static void	parent_process(int i)
+static int	parent_process(int i)
 {
 	pid_t	pid;
 
@@ -60,11 +61,7 @@ static void	parent_process(int i)
 		close(infos()->pipe_aux[1]);
 		wait(NULL);
 		if (i == infos()->num_cmds - 1)
-		{
-			write(2, "hey!\n", 6);
-			free_pipex();
-			exit(EXIT_SUCCESS);
-		}
+			return (1);
 	}
-	return ;
+	return (0);
 }
