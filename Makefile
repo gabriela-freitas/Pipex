@@ -6,7 +6,7 @@
 #    By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 14:15:30 by gafreita          #+#    #+#              #
-#    Updated: 2022/06/20 22:13:07 by gafreita         ###   ########.fr        #
+#    Updated: 2022/06/21 21:04:33 by gafreita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS =	parse.c \
 
 OBJS = $(SRCS:%.c=%.o)
 
-CC = gcc -Wall -Wextra -Werror -g
+CC = gcc -Wall -Wextra -Werror
 
 INCLUDES = -ILIBFT/libft/
 
@@ -29,6 +29,7 @@ LIB_DIR = LIBFT/libft/
 
 COLOUR_GREEN=\033[7;1;32m
 COLOUR_END=\033[0m
+COLOUR_YELLOW=\033[0;33m
 
 # ^ primeira dependencia
 # @ nome da regra
@@ -43,10 +44,10 @@ submodule:
 all: $(NAME) submodule
 
 valgrind: re
-	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex here_doc "hey" "grep oi" "wc" out && cat out 
+	@ valgrind --show-leak-kinds=all --leak-check=full ./pipex here_doc "EOF" "grep o" "grep l" "grep a" "wc" out
 
 %.o: %.c
-	@$(CC) -g $(INCLUDES) -c $(^) -o $(@)
+	@$(CC) $(INCLUDES) -c $(^) -o $(@)
 
 libft:
 	@make -C $(LIB_DIR)

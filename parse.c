@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/20 22:04:10 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/21 20:03:13 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ char	**get_path(char **envp)
 	while (ft_strncmp(*envp, "PATH", 4))
 		envp++;
 	aux = ft_strchr(*envp, '=') + 1;
-	path = ft_split(aux, ':');
+ 	path = ft_split(aux, ':');
 	return (path);
 }
 
 /*find in which path is every command*/
-void	get_command_path(char **cmd)
+void
+get_command_path(char **cmd)
 {
 	char	*path;
 	int		i;

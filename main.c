@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:45:13 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/20 22:09:58 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/21 21:02:20 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	exit_message(char *error);
 
 int	main(int argc, char **argv, char **envp)
 {
+	infos()->cmds = NULL;
+	infos()->envp = NULL;
+	infos()->paths = NULL;
 	if (argc > 4)
 	{
 		if (!ft_strncmp(argv[1], "here_doc", 9))
@@ -50,12 +53,9 @@ void	free_pipex(void)
 			free_split(infos()->cmds[i]);
 			i ++;
 		}
-		//free_split(infos()->cmds[i]);
+		free_split(infos()->cmds[i]);
+		free(infos()->cmds);
 	}
-	if (infos()->fd_in)
-		close(infos()->fd_in);
-	if (infos()->fd_out)
-		close(infos()->fd_out);
 	if (!access(TEMP_FILE, F_OK))
 		unlink(TEMP_FILE);
 }
