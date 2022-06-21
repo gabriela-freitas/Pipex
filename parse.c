@@ -6,7 +6,7 @@
 /*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:18:48 by gafreita          #+#    #+#             */
-/*   Updated: 2022/06/21 22:06:58 by gafreita         ###   ########.fr       */
+/*   Updated: 2022/06/22 00:28:52 by gafreita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	get_command_path(char **cmd)
 		i ++;
 	}
 	free(aux);
-	if (access(path, F_OK) == -1)
+	if (access(*cmd, F_OK) == -1)
 		exit_message("Not a valid command or path");
 	return ;
 }
