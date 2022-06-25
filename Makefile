@@ -68,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft subm00odule valgrind
+.PHONY: all clean fclean re libft submodule valgrind
